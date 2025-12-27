@@ -1,7 +1,7 @@
 /**
  * SVG Layer JSON Schema
  *
- * Defines the structure for Claude's JSON response describing how to build an SVG
+ * Defines the structure for the LLM's JSON response describing how to build an SVG
  * from layers of primitive shapes.
  */
 

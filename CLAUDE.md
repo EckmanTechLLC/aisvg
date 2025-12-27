@@ -9,26 +9,26 @@
 - Iterate fast, add features as needed
 
 ## PROJECT PURPOSE
-Generate SVGs from text prompts using Claude's structured output. The key concept: SVGs are **layers of primitive shapes** (circles, rectangles, polygons, etc.) that combine to create complex images (valves, tanks, pumps, diagrams, etc.).
+Generate SVGs from text prompts using LLM structured output. The key concept: SVGs are **layers of primitive shapes** (circles, rectangles, polygons, etc.) that combine to create complex images (valves, tanks, pumps, diagrams, etc.).
 
 ## TECH STACK
 - **Runtime**: Node.js 20+ with TypeScript
-- **LLM**: Claude API (Anthropic) with structured JSON output
+- **LLM**: Anthropic Claude or OpenAI GPT with structured JSON output
 - **CLI**: Simple interactive terminal interface
 - **SVG Generation**: Custom JSON-to-SVG engine
 - **Storage**: Local filesystem (./diagrams/ directory)
 
 ## HOW IT WORKS
 1. User enters description via CLI (e.g., "a centrifugal pump with inlet/outlet")
-2. Send prompt to Claude API requesting structured JSON response
-3. Claude returns JSON describing layers/shapes/positions (NOT raw SVG)
+2. Send prompt to LLM API requesting structured JSON response
+3. LLM returns JSON describing layers/shapes/positions (NOT raw SVG)
 4. Tool generates actual SVG from JSON specification
 5. Save SVG to diagrams folder with timestamp and description
 
 ## GENERATION MODES
 
 ### Coordinate Mode (default)
-Claude specifies exact coordinates for shapes:
+LLM specifies exact coordinates for shapes:
 ```json
 {
   "name": "ball_valve",
@@ -39,7 +39,7 @@ Claude specifies exact coordinates for shapes:
 ```
 
 ### Semantic Mode
-Claude describes relationships, generator calculates coordinates:
+LLM describes relationships, generator calculates coordinates:
 ```json
 {
   "name": "ball_valve_isa",

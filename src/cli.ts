@@ -2,7 +2,8 @@
 /**
  * AISVG CLI
  *
- * Interactive CLI for generating SVGs from text prompts using Claude AI
+ * Interactive CLI for generating SVGs from text prompts using AI
+ * Supports Anthropic Claude and OpenAI GPT models
  */
 
 import { createInterface } from 'readline/promises';
