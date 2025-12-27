@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Generated SVGs (local only)
+diagrams/
+
+# Environment variables (API keys)
+.env
+
+# Backup files
+*.backup
+*.bak
+*~
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

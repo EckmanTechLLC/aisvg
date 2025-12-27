@@ -1,0 +1,27 @@
+{
+  "name": "aisvg",
+  "version": "0.1.0",
+  "description": "CLI tool to generate SVGs from text prompts using Claude AI",
+  "type": "module",
+  "main": "dist/cli.js",
+  "bin": {
+    "aisvg": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/cli.ts",
+    "start": "node dist/cli.js"
+  },
+  "keywords": ["svg", "ai", "claude", "cli", "generator"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
+    "openai": "^4.20.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}
