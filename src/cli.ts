@@ -42,17 +42,20 @@ const rl = createInterface({ input, output });
  */
 async function main() {
   let currentMode: GenerationMode = 'coordinate';
+  let currentProvider = process.env.LLM_PROVIDER || 'anthropic';
 
   console.log('=== AISVG - AI-Powered SVG Generator ===\n');
   console.log('Commands:');
   console.log('  <description>    - Generate new SVG from description');
   console.log('  refine <text>    - Refine the last generated SVG');
   console.log('  mode <s|c>       - Switch mode: s=semantic, c=coordinate');
+  console.log('  provider <a|o>   - Switch provider: a=anthropic, o=openai');
   console.log('  exit             - Exit the tool\n');
-  console.log(`Current mode: ${currentMode}\n`);
+  console.log(`Current mode: ${currentMode}`);
+  console.log(`Current provider: ${currentProvider}\n`);
 
   while (true) {
-    const prompt = await rl.question(`[${currentMode}] > `);
+    const prompt = await rl.question(`[${currentMode}|${currentProvider}] > `);
 
     if (!prompt.trim()) {
       continue;
@@ -75,6 +78,23 @@ async function main() {
         console.log('Switched to COORDINATE mode\n');
       } else {
         console.log('Invalid mode. Use: mode s (semantic) or mode c (coordinate)\n');
+      }
+      continue;
+    }
+
+    // Handle provider switching
+    if (prompt.toLowerCase().startsWith('provider ')) {
+      const providerArg = prompt.slice(9).trim().toLowerCase();
+      if (providerArg === 'a' || providerArg === 'anthropic') {
+        currentProvider = 'anthropic';
+        process.env.LLM_PROVIDER = 'anthropic';
+        console.log('Switched to ANTHROPIC provider\n');
+      } else if (providerArg === 'o' || providerArg === 'openai') {
+        currentProvider = 'openai';
+        process.env.LLM_PROVIDER = 'openai';
+        console.log('Switched to OPENAI provider\n');
+      } else {
+        console.log('Invalid provider. Use: provider a (anthropic) or provider o (openai)\n');
       }
       continue;
     }
