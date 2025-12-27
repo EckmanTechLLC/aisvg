@@ -5,6 +5,7 @@ A CLI tool that generates SVGs from text prompts using AI (Claude/OpenAI). Featu
 ## Key Features
 
 - **Hybrid Generation Modes**: Switch between coordinate and semantic approaches
+- **Multiple LLM Providers**: Switch between Anthropic Claude and OpenAI GPT-4 at runtime
 - **Coordinate Mode**: LLM specifies exact coordinates - best for creative/organic shapes
 - **Semantic Mode**: LLM describes relationships - best for standard symbols (ISA, P&ID)
 - **8 Shape Types**: rect, circle, ellipse, line, polyline, polygon, path (curves), text (labels)
@@ -32,10 +33,13 @@ A CLI tool that generates SVGs from text prompts using AI (Claude/OpenAI). Featu
 npm install
 ```
 
-2. Set your Anthropic API key:
+2. Set your API key(s):
 ```bash
 cp .env.example .env
-# Edit .env and add your ANTHROPIC_API_KEY
+# Edit .env and add your API key(s):
+# - ANTHROPIC_API_KEY (for Claude)
+# - OPENAI_API_KEY (for GPT-4)
+# - LLM_PROVIDER (optional: anthropic or openai)
 ```
 
 3. Build the project:
@@ -54,20 +58,26 @@ npm run dev
 
 - **Switch mode**: `mode s` (semantic) or `mode c` (coordinate)
   ```
-  [coordinate] > mode s
+  [coordinate|anthropic] > mode s
   Switched to SEMANTIC mode
+  ```
+
+- **Switch provider**: `provider a` (Anthropic/Claude) or `provider o` (OpenAI/GPT-4)
+  ```
+  [coordinate|anthropic] > provider o
+  Switched to OPENAI provider
   ```
 
 - **Generate new SVG**: Just type your description
   ```
-  [semantic] > ISA ball valve symbol
-  [coordinate] > a cute mouse with round ears
+  [semantic|anthropic] > ISA ball valve symbol
+  [coordinate|openai] > a cute mouse with round ears
   ```
 
 - **Refine last SVG**: Use the `refine` command (automatically uses same mode)
   ```
-  [semantic] > refine fill in the circle
-  [coordinate] > refine make ears bigger and add whiskers
+  [semantic|anthropic] > refine fill in the circle
+  [coordinate|openai] > refine make ears bigger and add whiskers
   ```
 
 - **Exit**: Type `exit`
@@ -85,6 +95,22 @@ npm run dev
 - ISA, P&ID, electrical diagrams
 - Geometric compositions
 - Shapes with precise relationships
+
+### Comparing LLM Providers
+
+Try the same prompt with different providers to compare quality:
+
+```bash
+[coordinate|anthropic] > a mouse with round ears
+# View result...
+
+[coordinate|anthropic] > provider o
+[coordinate|openai] > a mouse with round ears
+# Compare results!
+```
+
+**Anthropic Claude** - Often better at understanding technical symbols and geometric relationships
+**OpenAI GPT-4** - May excel at creative interpretations and organic shapes
 
 ## Output
 
